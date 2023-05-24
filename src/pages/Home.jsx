@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
-import getTrandingMovies from '../utils/apiFuncions';
 import MovieCard from '../components/MovieCard';
+import Loading from '../components/Loading';
+import { getBySearch, getTrandingMovies } from '../utils/apiFuncions';
 
 export default class Home extends Component {
   state = {
     movies: [],
     isLoading: true,
+    search: '',
   };
 
   async componentDidMount() {
@@ -16,14 +18,33 @@ export default class Home extends Component {
     });
   }
 
+  handleInputSearch = ({ target: { name, value } }) => {
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  handleSearch = async () => {
+    this.setState({ isLoading: true });
+    const { search } = this.state;
+    this.setState({
+      movies: await getBySearch(search),
+      isLoading: false,
+    });
+  };
+
   render() {
-    const { movies, isLoading } = this.state;
+    const { movies, isLoading, search } = this.state;
     if (isLoading) {
-      return (<div>Carregando...</div>);
+      return (<Loading />);
     }
     return (
       <div>
-        <Header />
+        <Header
+          search={ search }
+          handleInputSearch={ this.handleInputSearch }
+          handleSearch={ this.handleSearch }
+        />
         {movies.map((movie) => <MovieCard key={ movie.id } { ...movie } />)}
       </div>
     );

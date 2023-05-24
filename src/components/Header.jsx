@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Search from './Search';
 
 export default class Header extends Component {
   state = {
@@ -16,6 +17,7 @@ export default class Header extends Component {
     return (
       <header>
         <p>{userName}</p>
+        <Search { ...this.props } />
       </header>
     );
   }

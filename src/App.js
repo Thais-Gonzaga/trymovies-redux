@@ -11,7 +11,7 @@ export default class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route path="/home" component={ Home } />
-          <Route path="/movies/:id" component={ MovieDetail } />
+          <Route path="/movie/:id" component={ MovieDetail } />
           <Route path="/favorites" component={ Favorites } />
           <Route path="/" component={ Login } />
         </Switch>
