@@ -33,19 +33,29 @@ export default class Home extends Component {
     });
   };
 
+  handleReload = () => {};
+
   render() {
     const { movies, isLoading, search } = this.state;
     if (isLoading) {
       return (<Loading />);
     }
     return (
-      <div>
+      <div className="bg-zinc-800 w-full h-full text-zinc-300 ps-10 pe-10">
         <Header
           search={ search }
           handleInputSearch={ this.handleInputSearch }
           handleSearch={ this.handleSearch }
         />
-        {movies.map((movie) => <MovieCard key={ movie.id } { ...movie } />)}
+        <div className="flex flex-wrap gap-4 justify-center w-4/5 m-auto">
+          {movies
+            .map((movie) => (
+              <MovieCard
+                handleReload={ this.handleReload }
+                key={ movie.id }
+                { ...movie }
+              />))}
+        </div>
       </div>
     );
   }
