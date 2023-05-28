@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import MovieCard from '../components/MovieCard';
 import Loading from '../components/Loading';
@@ -37,17 +38,20 @@ export default class Home extends Component {
 
   render() {
     const { movies, isLoading, search } = this.state;
+    const { location: { pathname } } = this.props;
     if (isLoading) {
       return (<Loading />);
     }
     return (
-      <div className="bg-zinc-800 w-full h-full text-zinc-300 ps-10 pe-10">
+      <div className="bg-zinc-800 mb-8 w-full h-full text-zinc-300 ps-10 pe-10">
         <Header
+          haveSearch
+          pathname={ pathname }
           search={ search }
           handleInputSearch={ this.handleInputSearch }
           handleSearch={ this.handleSearch }
         />
-        <div className="flex flex-wrap gap-4 justify-center w-4/5 m-auto">
+        <div className="flex flex-wrap gap-4 justify-center w-full m-auto">
           {movies
             .map((movie) => (
               <MovieCard
@@ -60,3 +64,5 @@ export default class Home extends Component {
     );
   }
 }
+
+Home.propTypes = PropTypes.shape({}).isRequired;

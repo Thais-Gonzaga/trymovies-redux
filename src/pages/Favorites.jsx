@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import MovieCard from '../components/MovieCard';
+import Header from '../components/Header';
 
 export default class Favorites extends Component {
   state = {
@@ -22,9 +24,12 @@ export default class Favorites extends Component {
 
   render() {
     const { favoriteMovies } = this.state;
+    const { location: { pathname } } = this.props;
+
     return (
-      <div className="bg-zinc-800 w-screen h-screen text-zinc-300 ps-10 pe-10">
-        <div className="flex flex-wrap gap-4 justify-center w-4/5 m-auto">
+      <div className="bg-zinc-800 text-zinc-300 ps-10 pe-10">
+        <Header pathname={ pathname } />
+        <div className="flex flex-wrap gap-4 justify-center w-full m-auto">
           {favoriteMovies
             .map((movie) => (
               <MovieCard
@@ -37,3 +42,5 @@ export default class Favorites extends Component {
     );
   }
 }
+
+Favorites.propTypes = PropTypes.shape({}).isRequired;
