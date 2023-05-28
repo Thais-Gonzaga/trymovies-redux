@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { getMovieById } from '../utils/apiFuncions';
 import Loading from '../components/Loading';
 import Header from '../components/Header';
-
+//
 export default class MovieDetail extends Component {
   state = {
     movie: {},
