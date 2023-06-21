@@ -34,7 +34,7 @@ Neste projeto, verificamos se você é capaz de:
 
   - Use o comando: `git clone git@github.com:Josieljcc/movies-react-tailwindcss.git`.
   - Entre na pasta do repositório que você acabou de clonar:
-    - `cd sd-031-b-project-trybewallet`
+    - `cd movies-react-tailwindcss`
 
   2. Instale as dependências
 
