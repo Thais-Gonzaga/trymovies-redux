@@ -228,7 +228,7 @@ No Trymovies, salvamos no localStorage o nome da pessoa usuária, certo? Agora, 
 
 ---
 
-## Header
+## Componente Header
 
 No Trymovies, pegavamos do localStore a informação da pessoa logada e renderizava na tela. Agora, vamos pegar do estado global a informação.
 
