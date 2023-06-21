@@ -219,19 +219,22 @@ export default exampleReducer;
 
 No Trymovies, salvamos no localStorage o nome da pessoa usuária, certo? Agora, precisamos salvar no estado global.
 
-## 1. Salve o nome no estado global da aplicação
+## 1. Salve o nome e o email no estado global da aplicação
 
+  - Crie um input para pessoa usuária digitar o email;
+  - O email precisa estar em um formato válido, como 'alguem@alguem.com';
   - Salve o nome da pessoa usuária no estado global da aplicação, com a chave **_userName_**, assim que a pessoa usuária _logar_;
+  - Salve o email da pessoa usuária no estado global da aplicação, com a chave **_userEmail_**, assim que a pessoa usuária _logar_;
 
 ---
 
 ## Header
 
-No Trymovies, pegavamos do localStore e renderizava na tela. Agora, vamos pegar do estado global a informação.
+No Trymovies, pegavamos do localStore a informação da pessoa logada e renderizava na tela. Agora, vamos pegar do estado global a informação.
 
-## 2. Um elemento que exiba o e-mail da pessoa usuária que fez login:
+## 2. Exibir o nome e o email da pessoa usuária que fez login:
 
-  - você deve pegar o e-mail do estado global da aplicação (no Redux) e renderizar na tela.
+  - você deve pegar o nome e o email do estado global da aplicação (no Redux) e renderizar na tela.
 
 ---
 ## Favoritos
