@@ -2,22 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import PropTypes from 'prop-types';
 import { AiOutlineUser } from 'react-icons/ai';
+import { connect } from 'react-redux';
 import Search from './Search';
 
-export default class Header extends Component {
-  state = {
-    userName: '',
-  };
-
-  componentDidMount() {
-    this.setState({
-      userName: localStorage.getItem('user'),
-    });
-  }
-
+class Header extends Component {
   render() {
-    const { userName } = this.state;
-    const { pathname, haveSearch } = this.props;
+    const { pathname, haveSearch, userName, userEmail } = this.props;
     return (
       <header
         className="w-[80%] h-32
@@ -42,9 +32,17 @@ export default class Header extends Component {
           <AiOutlineUser className="text-3xl" />
           <p>{userName}</p>
         </div>
+        <p>{userEmail}</p>
       </header>
     );
   }
 }
 
+const mapStateToProps = ({ user: { userName, userEmail } }) => ({
+  userName,
+  userEmail,
+});
+
 Header.propTypes = PropTypes.shape({}).isRequired;
+
+export default connect(mapStateToProps)(Header);

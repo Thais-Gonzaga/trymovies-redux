@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { connect } from 'react-redux';
+import { addFavorite, removeFavorite } from '../redux/actions/favorite';
 
-export default class MovieCard extends Component {
+class MovieCard extends Component {
   state = {
     favorite: false,
   };
@@ -17,21 +19,21 @@ export default class MovieCard extends Component {
   }
 
   handleFavorite = () => {
-    const { title, poster_path: poster, id, handleReload } = this.props;
+    const { title, poster_path: poster,
+      id, handleReload, dispatch, movies } = this.props;
     const { favorite } = this.state;
-    const moviesLocalStorage = JSON.parse(localStorage.getItem('favorites')) || [];
     const movieToSave = { title, id, poster_path: poster };
     if (!favorite) {
-      localStorage
-        .setItem('favorites', JSON.stringify([...moviesLocalStorage, movieToSave]));
+      dispatch(addFavorite(movieToSave));
+      localStorage.setItem('favorites', JSON.stringify([...movies, movieToSave]));
       this.setState({
         favorite: true,
       });
       return;
     }
-    const newMoviesToSave = moviesLocalStorage.filter((movie) => movie.id !== id);
-    localStorage
-      .setItem('favorites', JSON.stringify(newMoviesToSave));
+    const newMoviesToSave = movies.filter((movie) => movie.id !== id);
+    localStorage.setItem('favorites', JSON.stringify(newMoviesToSave));
+    dispatch(removeFavorite(newMoviesToSave));
     handleReload();
     this.setState({
       favorite: false,
@@ -83,4 +85,10 @@ export default class MovieCard extends Component {
   }
 }
 
+const mapStateToProps = ({ favorites: { movies } }) => ({
+  movies,
+});
+
 MovieCard.propTypes = PropTypes.shape({}).isRequired;
+
+export default connect(mapStateToProps)(MovieCard);

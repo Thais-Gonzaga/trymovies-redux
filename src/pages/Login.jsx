@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropType from 'prop-types';
+import { connect } from 'react-redux';
+import { addUser } from '../redux/actions/user';
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
-    name: '',
+    userName: '',
+    userEmail: '',
   };
 
   handleChange = ({ target: { name, value } }) => {
@@ -11,15 +14,22 @@ export default class Login extends Component {
   };
 
   handleSubmit = () => {
-    const { name } = this.state;
-    const { history } = this.props;
-    localStorage.setItem('user', name);
+    const { history, dispatch } = this.props;
+    dispatch(addUser(this.state));
     history.push('/home');
   };
 
+  validateLogin = () => {
+    const min = 6;
+    const { userName, userEmail } = this.state;
+    const regexEmail = /[A-Za-z0-9]+@[A-Za-z]+\.com/;
+    const isNameValid = userName.length > min;
+    const isEmailValid = regexEmail.test(userEmail);
+    return !(isEmailValid && isNameValid);
+  };
+
   render() {
-    const { name } = this.state;
-    const min = 3;
+    const { userName, userEmail } = this.state;
     return (
       <div
         className="bg-zinc-800 text-zinc-300
@@ -41,9 +51,19 @@ export default class Login extends Component {
             ps-5
             placeholder:text-zinc-300 p-2"
             type="text"
+            placeholder="Email"
+            name="userEmail"
+            value={ userEmail }
+            onChange={ this.handleChange }
+          />
+          <input
+            className="bg-zinc-500 rounded-md
+            ps-5
+            placeholder:text-zinc-300 p-2"
+            type="text"
             placeholder="Nome"
-            name="name"
-            value={ name }
+            name="userName"
+            value={ userName }
             onChange={ this.handleChange }
           />
           <button
@@ -52,7 +72,7 @@ export default class Login extends Component {
             ease-in duration-200
              p-2 text-zinc-200 disabled:bg-zinc-700
              disabled:cursor-not-allowed hover:bg-red-500"
-            disabled={ name.length < min }
+            disabled={ this.validateLogin() }
             onClick={ this.handleSubmit }
           >
             Entrar
@@ -64,3 +84,5 @@ export default class Login extends Component {
 }
 
 Login.propTypes = PropType.shape({}).isRequired;
+
+export default connect()(Login);
