@@ -215,7 +215,7 @@ export default exampleReducer;
 
 ---
 
-## Página de Login
+##                                   Página de Login
 
 No Trymovies, salvamos no localStorage o nome da pessoa usuária, certo? Agora, precisamos salvar no estado global.
 
@@ -228,7 +228,7 @@ No Trymovies, salvamos no localStorage o nome da pessoa usuária, certo? Agora, 
 
 ---
 
-## Componente Header
+##                                   Componente Header
 
 No Trymovies, pegavamos do localStore a informação da pessoa logada e renderizava na tela. Agora, vamos pegar do estado global a informação.
 
@@ -237,7 +237,7 @@ No Trymovies, pegavamos do localStore a informação da pessoa logada e renderiz
   - você deve pegar o nome e o email do estado global da aplicação (no Redux) e renderizar na tela.
 
 ---
-## Favoritos
+##                                   Favoritos
 
 ## DESAFIO.Refatore os favoritos para o estado global: 
 
